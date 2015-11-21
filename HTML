@@ -25,7 +25,9 @@ canvas {
 </style>
 <body>
 	<canvas id = 'canvas' width = '600' height = '400'></canvas>
-	<input type = 'button' onclick = 'drawPerson()' id = 'birth' value = 'Hello World'>
+	<input type = 'button' id = 'birth' value = 'Hello World' onclick = 'born()'>
+	<br>
+	<input type = 'button' id = 'smell' value = 'Investigate' onclick = 'approach()'>
 </body>
 
 <script>
@@ -98,19 +100,32 @@ function fillBG() {
 		context.strokeStyle = '#A9F5F2';
 		context.stroke();
 	}
-	function text() {
-	context.font = "20px Matisse itc";
-	context.fillStyle = "black";
-	context.fillText("Click here to be born!", 200, 250);
-	
-	var Birth = document.getElementById('birth');
 
-
-}
-
-	text();
 	Sun();
 	clouds();
+}
+
+function startText() {
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("Click the correct button to be born!", 200, 250);
+}
+
+function prettyText() {
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("Look! Something beautiful. Go take a look.", 200, 250);
+}
+
+function born() {
+	fillBG();;
+	drawPerson();
+	prettyText();
+}
+function approach() {
+	fillBG();
+	drawPerson();
+
 }
 
 
@@ -160,6 +175,7 @@ function degreesToRadians(degrees) {
 
 window.onload = function() {
 	fillBG();
+	startText();
 	
 }
 
