@@ -11,14 +11,40 @@ body {
 }
 canvas {
 	border: 3px solid black;;
+	padding: 0;
+	margin: auto;
+	display: block;
+	width: 600px;
+	height: 400px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 </style>
+<body>
+	<canvas id = 'canvas' width = '600' height = '400'></canvas>
+</body>
+
 <script>
-var canvas;
-var context;
-var person;
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+
+function fillBG() {
+	context.fillStyle = '#81DAF5';
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	context.fillStyle = '#04B404';
+	context.fillRect(0, 370, canvas.width, 30);
+}
+
+
+window.onload = function() {
+	fillBG();
+}
+
 
 </script>
 </head>
-<body>
-	<canvas id = "canvas" width = "600" height = "400"></canvas>
+</html>
