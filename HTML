@@ -37,6 +37,45 @@ function fillBG() {
 	context.fillRect(0, 0, canvas.width, canvas.height);
 	context.fillStyle = '#04B404';
 	context.fillRect(0, 370, canvas.width, 30);
+	context.beginPath();
+	context.moveTo(0,372);
+	context.lineTo(canvas.width,372);
+	context.strokeStyle = '#0A2A12';
+	context.stroke();
+	function sun() {
+		context.beginPath();
+		context.arc(560, 40, 30, degreesToRadians(360), false);
+		context.fillStyle = '#FACC2E';
+		context.fill();
+
+		context.beginPath();
+		context.arc(560, 40, 35, degreesToRadians(360), false);
+		context.strokeStyle = '#FFFF00';
+		context.lineWidth = 2;
+		context.stroke();
+
+		context.beginPath();
+		context.arc(556, 38, 37, degreesToRadians(360), false);
+		context.strokeStyle = '#F7FE2E';
+		context.lineWidth = 1;
+		context.stroke();
+
+		context.beginPath();
+		context.arc(563, 43, 40, degreesToRadians(360), false);
+		context.strokeStyle = '#FACC2E';
+		context.lineWidth = 1;
+		context.stroke();
+
+		context.beginPath();
+		context.arc(555, 44, 39, degreesToRadians(360), false);
+		context.strokeStyle = '#F2F5A9';
+		context.lineWidth = 2;
+		context.stroke();
+	}
+	sun();
+}
+function degreesToRadians(degrees) {
+	return(degrees * Math.PI)/180;
 }
 
 
