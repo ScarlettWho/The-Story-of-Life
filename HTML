@@ -30,6 +30,8 @@ canvas {
 <script>
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
+var person;
+
 
 
 function fillBG() {
@@ -42,7 +44,7 @@ function fillBG() {
 	context.lineTo(canvas.width,372);
 	context.strokeStyle = '#0A2A12';
 	context.stroke();
-	function sun() {
+	function Sun() {
 		context.beginPath();
 		context.arc(560, 40, 30, degreesToRadians(360), false);
 		context.fillStyle = '#FACC2E';
@@ -72,8 +74,72 @@ function fillBG() {
 		context.lineWidth = 2;
 		context.stroke();
 	}
-	sun();
+	function clouds() {
+		context.beginPath();
+		context.moveTo(30,50);
+		context.bezierCurveTo(30,5,70,50,60,30);
+		context.bezierCurveTo(50,20,110,5,80,50);
+		context.bezierCurveTo(60,15,200,15,100,80);
+		context.bezierCurveTo(100,150,50,80,60,90);
+		context.bezierCurveTo(50,160,5,100,30,49);
+		context.lineWidth = 7;
+		context.strokeStyle = '#A9F5F2';
+		context.stroke();
+
+		context.beginPath();
+		context.moveTo(150,170);
+		context.bezierCurveTo(150,110,190,170,180,150);
+		context.bezierCurveTo(130,120,190,20,210,160);
+		context.bezierCurveTo(300,130,180,235,200,170);
+		context.bezierCurveTo(300,150,160,270,180,190);
+		context.bezierCurveTo(200,200,150,280,150,169);
+		context.lineWidth = 3;
+		context.strokeStyle = '#A9F5F2';
+		context.stroke();
+	}
+
+	Sun();
+	clouds();
 }
+
+function drawPerson() {
+	//bottom
+	context.beginPath();
+	context.rect(5, 320, 30, 50);
+	context.fillStyle = "black";
+	context.fill();
+
+	//shirt_4
+	context.beginPath();
+	context.rect(5, 320, 30, 46);
+	context.fillStyle = "red";
+	context.fill();
+
+	//head
+	context.beginPath();
+	context.rect(5, 320, 30, 20);
+	context.fillStyle = "#B45F04";
+	context.fill();
+	//arm
+	context.beginPath();
+	context.rect(15, 340, 12, 25);
+	context.fillStyle = "#B45F04";
+	context.fill();
+
+	//sleeve
+	context.beginPath();
+	context.rect(15, 340, 12, 10);
+	context.fillStyle = "#B40404";
+	context.fill();
+
+	//hair
+	context.beginPath();
+	context.rect(5, 320, 30, 4);
+	context.fillStyle = "black";
+	context.fill();
+	
+}
+
 function degreesToRadians(degrees) {
 	return(degrees * Math.PI)/180;
 }
@@ -81,6 +147,7 @@ function degreesToRadians(degrees) {
 
 window.onload = function() {
 	fillBG();
+	drawPerson();
 }
 
 
