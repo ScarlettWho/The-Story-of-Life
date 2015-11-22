@@ -30,12 +30,15 @@ canvas {
 	<input type = 'button' id = 'smell' value = 'Investigate' onclick = 'approach()'>
 	<br>
 	<input type = 'button' id = 'fight' value = 'Defend' onclick = 'defend()'>
+	<br>
+	<input type = 'button' id = 'listen' value = 'Listen' onclick = 'bearAttack()'>
+
 </body>
 
 <script>
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
-var person;
+var timer;
 
 
 //draws scene
@@ -148,6 +151,11 @@ function prettyText() {
 	context.fillStyle = "black";
 	context.fillText("Look! Something beautiful. Go take a look.", 200, 250);
 }
+function ohNoText() {
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("What's that sound?", 200, 250);
+}
 
 //action functions
 function born() {
@@ -160,19 +168,39 @@ function approach() {
 	fillBG();
 	drawPerson();
 	drawBear();
-	bottom.x += 5;
-	shirt.x += 5;
-	head.x += 5;
-	arm.x += 5;
-	sleeve.x += 5;
-	hair.x += 5;
-if (bottom.x == 330) {
-	document.getElementById('smell').disabled = true;
-	drawBear();
+	bottom.x += 7;
+	shirt.x += 7;
+	head.x += 7;
+	arm.x += 7;
+	sleeve.x += 7;
+	hair.x += 7;
+	if (bottom.x >= 330) {
+		document.getElementById('smell').disabled = true;
+		ohNoText();
+	}
 }
-	
+function bearAttack() {
+	timer = setInterval(bearAttack,200);
+	//drawBear();
+	//fillBG();
+	//drawPerson();
 
-}
+	if (bearHead.x !== 423) {
+		body.x -= 3;
+		back.x -= 3;
+		neck.x -= 3;
+		neck2.x -= 3;
+		bearHead.x -= 3;
+		legA.x -= 3;
+		legB.x -= 3;
+		ear.x -= 3;
+		tail.x -= 3;
+		fillBG();
+		drawBear();
+		drawPerson();
+	}
+}	
+
 
 //person variables
 var bottom = {x:5, y:320, width:30, height:50};
@@ -181,7 +209,6 @@ var head = {x:5, y:320, width:30, height:20};
 var arm = {x:15, y:340, width:12, height:25};
 var sleeve = {x:15, y:340, width:12, height:10};
 var hair = {x:5, y:320, width:30, height:4};
-
 function drawPerson() {
 	//bottom
 	context.beginPath();
