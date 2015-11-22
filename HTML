@@ -27,17 +27,17 @@ canvas {
 	<canvas id = 'canvas' width = '600' height = '400'></canvas>
 	<input type = 'button' id = 'birth' value = 'Hello World' onclick = 'born()'>
 	<br>
-	<input type = 'button' id = 'smell' value = 'Investigate' onclick = 'approach()'>
+	<input type = 'button' id = 'smell' value = 'Investigate' onclick = 'approach()' disabled = 'true'>
 	<br>
-	<input type = 'button' id = 'fight' value = 'Defend' onclick = 'defend()'>
+	<input type = 'button' id = 'attack' value = 'Defend' onclick = 'stndGround()' disabled = 'true'>
 	<br>
-	<input type = 'button' id = 'listen' value = 'Listen' onclick = 'bearAttack()'>
+	<input type = 'button' id = 'listen' value = 'Listen' onclick = 'bearAttack()' disabled = 'true'>
 	<br>
-	<input type = 'button' id = 'revisit' value = 'Return' onclick = '()'>
+	<input type = 'button' id = 'revisit' value = 'Return' onclick = '()' disabled = 'true'>
 	<br>
-	<input type = 'button' id = 'irony' value = 'Love' onclick = '()'>
+	<input type = 'button' id = 'irony' value = 'Love' onclick = '()' disabled = 'true'>
 	<br>
-	<input type = 'button' id = 'escape' value = 'RUN!' onclick = '()'>
+	<input type = 'button' id = 'escape' value = 'RUN!' onclick = '()' disabled = 'true'>
 
 </body>
 
@@ -45,7 +45,7 @@ canvas {
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 var timer;
-var timer2;
+
 
 //draws scene
 function fillBG() {
@@ -186,8 +186,10 @@ function born() {
 	drawPerson();
 	prettyText();
 	document.getElementById('birth').disabled = true;
+	document.getElementById('smell').disabled = false;
 }
 function approach() {
+
 	fillBG();
 	drawPerson();
 	bottom.x += 12;
@@ -196,15 +198,17 @@ function approach() {
 	arm.x += 12;
 	sleeve.x += 12;
 	hair.x += 12;
+	
 	if (bottom.x >= 330) {
 		document.getElementById('smell').disabled = true;
+		document.getElementById('listen').disabled = false;
 		ohNoText();
 	}
-}
+}	
 function bearAttack() {
-	timer = setInterval(bearAttack,100);
-	
-	if (neck2.x !== 440) {
+	timer = setInterval(bearAttack(),100);
+
+	if(neck2.x !== 440) {
 		body.x -= 3;
 		back.x -= 3;
 		neck.x -= 3;
@@ -222,36 +226,14 @@ function bearAttack() {
 	}
 	else {
 		clearInterval(timer);
+		document.getElementById('listen').disabled = true;
+		document.getElementById('attack').disabled = false;
 	}
-	document.getElementById('listen').disabled = true;
 }
-function defend() {
-	timer2 = setInterval(defend,100);
-	drawBear();
-	if (neck2.x < 600) {
-		body.x += 7;
-		back.x += 7;
-		neck.x += 7;
-		neck2.x += 7;
-		//bear.x -= 3;
-		legA.x += 7;
-		legB.x += 7;
-		ear.x += 7;
-		tail.x += 7;
-		
-		fillBG();
-		drawBear();
-		drawPerson();
-		Ahhh();
-	}
-	else {
-		clearInterval(timer);
-	}
-	fillBG();
-	drawBear();
-	drawPerson();
-	document.getElementById('fight').disabled = true;
+function stndGround() {
+	document.getElementById('attack').disabled = true;
 }
+
 function revisit() {
 
 }
