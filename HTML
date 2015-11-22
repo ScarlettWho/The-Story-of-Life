@@ -206,7 +206,7 @@ function approach() {
 	}
 }	
 function bearAttack() {
-	timer = setInterval(bearAttack(),100);
+	timer = setInterval('bearAttack()',100);
 
 	if(neck2.x !== 440) {
 		body.x -= 3;
@@ -223,9 +223,6 @@ function bearAttack() {
 		drawBear();
 		drawPerson();
 		Ahhh();
-	}
-	else {
-		clearInterval(timer);
 		document.getElementById('listen').disabled = true;
 		document.getElementById('attack').disabled = false;
 	}
