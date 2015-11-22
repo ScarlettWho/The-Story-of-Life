@@ -28,6 +28,8 @@ canvas {
 	<input type = 'button' id = 'birth' value = 'Hello World' onclick = 'born()'>
 	<br>
 	<input type = 'button' id = 'smell' value = 'Investigate' onclick = 'approach()'>
+	<br>
+	<input type = 'button' id = 'fight' value = 'Defend' onclick = 'defend()'>
 </body>
 
 <script>
@@ -157,16 +159,22 @@ function born() {
 function approach() {
 	fillBG();
 	drawPerson();
+	drawBear();
 	bottom.x += 5;
 	shirt.x += 5;
 	head.x += 5;
 	arm.x += 5;
 	sleeve.x += 5;
 	hair.x += 5;
-
+if (bottom.x == 330) {
+	document.getElementById('smell').disabled = true;
+	drawBear();
+}
+	
 
 }
 
+//person variables
 var bottom = {x:5, y:320, width:30, height:50};
 var shirt = {x:5, y:320, width:30, height:46};
 var head = {x:5, y:320, width:30, height:20};
@@ -209,7 +217,63 @@ function drawPerson() {
 	context.rect(hair.x, hair.y, hair.width, hair.height);
 	context.fillStyle = "black";
 	context.fill();
-	
+}
+//bear variables
+var body = {x:647, y:290, width:80, height:55};
+var back = {x:652, y:280, width:70, height:55};
+var neck = {x:627, y:285, width:30, height:53};
+var neck2 = {x:617, y:290, width:30, height:50};
+var bearHead = {x:600, y:305, width:50, height:30};
+var legA = {x:637, y:320, width:30, height:50};
+var legB = {x:707, y:320, width:30, height:50};
+var ear = {x:622, y:280, width:12, height:12};
+var tail = {x:724, y:295, width:12, height:12};
+function drawBear(){
+	//body
+	context.beginPath();
+	context.rect(body.x, body.y, body.width, body.height);
+	context.fillStyle = "#8A4B08";
+	context.fill();
+	//back
+	context.beginPath();
+	context.rect(back.x, back.y, back.width, back.height);
+	context.fillStyle = "#8A4B08";
+	context.fill();
+	//neck
+	context.beginPath();
+	context.rect(neck.x, neck.y, neck.width, neck.height);
+	context.fillStyle = "#8A4B08";
+	context.fill();
+	//neck2
+	context.beginPath();
+	context.rect(neck2.x, neck2.y, neck2.width, neck2.height);
+	context.fillStyle = "#8A4B08";
+	context.fill();
+	//head
+	context.beginPath();
+	context.rect(bearHead.x, bearHead.y, bearHead.width, bearHead.height);
+	context.fillStyle = "#8A4B08";
+	context.fill();
+	//legA
+	context.beginPath();
+	context.rect(legA.x, legA.y, legA.width, legA.height);
+	context.fillStyle = "#61380B";
+	context.fill();
+	//legA1
+	context.beginPath();
+	context.rect(legB.x, legB.y, legB.width, legB.height);
+	context.fillStyle = "#61380B";
+	context.fill();
+	//legB
+	context.beginPath();
+	context.rect(ear.x, ear.y, ear.width, ear.height);
+	context.fillStyle = "#61380B";
+	context.fill();
+	//legB1
+	context.beginPath();
+	context.rect(tail.x, tail.y, tail.width, tail.height);
+	context.fillStyle = "#8A4B08";
+	context.fill();
 }
 
 function degreesToRadians(degrees) {
