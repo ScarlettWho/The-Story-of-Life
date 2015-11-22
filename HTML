@@ -32,6 +32,12 @@ canvas {
 	<input type = 'button' id = 'fight' value = 'Defend' onclick = 'defend()'>
 	<br>
 	<input type = 'button' id = 'listen' value = 'Listen' onclick = 'bearAttack()'>
+	<br>
+	<input type = 'button' id = 'revisit' value = 'Return' onclick = '()'>
+	<br>
+	<input type = 'button' id = 'irony' value = 'Love' onclick = '()'>
+	<br>
+	<input type = 'button' id = 'escape' value = 'RUN!' onclick = '()'>
 
 </body>
 
@@ -39,7 +45,7 @@ canvas {
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 var timer;
-
+var timer2;
 
 //draws scene
 function fillBG() {
@@ -156,6 +162,23 @@ function ohNoText() {
 	context.fillStyle = "black";
 	context.fillText("What's that sound?", 200, 250);
 }
+function Ahhh() {
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("Its a bear! Defend your beauty!", 200, 250);
+}
+function loveText() {
+
+}
+function ironyText() {
+
+}
+function deathText() {
+
+}
+
+
+
 
 //action functions
 function born() {
@@ -167,39 +190,81 @@ function born() {
 function approach() {
 	fillBG();
 	drawPerson();
-	drawBear();
-	bottom.x += 7;
-	shirt.x += 7;
-	head.x += 7;
-	arm.x += 7;
-	sleeve.x += 7;
-	hair.x += 7;
+	bottom.x += 12;
+	shirt.x += 12;
+	head.x += 12;
+	arm.x += 12;
+	sleeve.x += 12;
+	hair.x += 12;
 	if (bottom.x >= 330) {
 		document.getElementById('smell').disabled = true;
 		ohNoText();
 	}
 }
 function bearAttack() {
-	timer = setInterval(bearAttack,200);
-	//drawBear();
-	//fillBG();
-	//drawPerson();
-
-	if (bearHead.x !== 423) {
+	timer = setInterval(bearAttack,100);
+	
+	if (neck2.x !== 440) {
 		body.x -= 3;
 		back.x -= 3;
 		neck.x -= 3;
 		neck2.x -= 3;
-		bearHead.x -= 3;
+		//bear.x -= 3;
 		legA.x -= 3;
 		legB.x -= 3;
 		ear.x -= 3;
 		tail.x -= 3;
+		
 		fillBG();
 		drawBear();
 		drawPerson();
+		Ahhh();
 	}
-}	
+	else {
+		clearInterval(timer);
+	}
+	document.getElementById('listen').disabled = true;
+}
+function defend() {
+	timer2 = setInterval(defend,100);
+	drawBear();
+	if (neck2.x < 600) {
+		body.x += 7;
+		back.x += 7;
+		neck.x += 7;
+		neck2.x += 7;
+		//bear.x -= 3;
+		legA.x += 7;
+		legB.x += 7;
+		ear.x += 7;
+		tail.x += 7;
+		
+		fillBG();
+		drawBear();
+		drawPerson();
+		Ahhh();
+	}
+	else {
+		clearInterval(timer);
+	}
+	fillBG();
+	drawBear();
+	drawPerson();
+	document.getElementById('fight').disabled = true;
+}
+function revisit() {
+
+}
+function meet() {
+
+}
+function beeAttack() {
+
+}
+function dead() {
+
+}
+
 
 
 //person variables
@@ -250,7 +315,7 @@ var body = {x:647, y:290, width:80, height:55};
 var back = {x:652, y:280, width:70, height:55};
 var neck = {x:627, y:285, width:30, height:53};
 var neck2 = {x:617, y:290, width:30, height:50};
-var bearHead = {x:600, y:305, width:50, height:30};
+//var bear = {x:600, y:305, width:50, height:30};
 var legA = {x:637, y:320, width:30, height:50};
 var legB = {x:707, y:320, width:30, height:50};
 var ear = {x:622, y:280, width:12, height:12};
@@ -277,10 +342,10 @@ function drawBear(){
 	context.fillStyle = "#8A4B08";
 	context.fill();
 	//head
-	context.beginPath();
-	context.rect(bearHead.x, bearHead.y, bearHead.width, bearHead.height);
+	/*context.beginPath();
+	context.rect(bear.x, bear.y, bear.width, bear.height);
 	context.fillStyle = "#8A4B08";
-	context.fill();
+	context.fill();*/
 	//legA
 	context.beginPath();
 	context.rect(legA.x, legA.y, legA.width, legA.height);
@@ -302,6 +367,13 @@ function drawBear(){
 	context.fillStyle = "#8A4B08";
 	context.fill();
 }
+//bee variables
+var beeBody;
+var beeStripe;
+var beeSting;
+var beeWings;
+
+
 
 function degreesToRadians(degrees) {
 	return(degrees * Math.PI)/180;
