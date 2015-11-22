@@ -36,7 +36,7 @@ var context = canvas.getContext('2d');
 var person;
 
 
-
+//draws scene
 function fillBG() {
 	context.fillStyle = '#81DAF5';
 	context.fillRect(0, 0, canvas.width, canvas.height);
@@ -100,69 +100,113 @@ function fillBG() {
 		context.strokeStyle = '#A9F5F2';
 		context.stroke();
 	}
+	function flower() {
+		//stem
+		context.beginPath();
+		context.moveTo(400,372);
+		context.lineTo(400,305);
+		context.lineWidth = 3
+		context.strokeStyle = '#0A2A12';
+		context.stroke();
+		//petals
+		context.beginPath();
+		context.moveTo(400,300);
+		context.bezierCurveTo(395,320,405,320,400,300);
+		context.bezierCurveTo(410.606,317.678,417.678,310.606,400,300);
+		context.bezierCurveTo(420,305,420,295,400,300);
+		context.bezierCurveTo(417.678,289.394,410.606,282.322,400,300);
+		context.bezierCurveTo(405,280,395,280,400,300);
+		context.bezierCurveTo(389.394,282.322,382.322,289.394,400,300);
+		context.bezierCurveTo(380,295,380,305,400,300);
+		context.bezierCurveTo(382.322,310.606,389.394,317.678,400,300);
+		context.closePath()
+		context.fillStyle = "pink"
+		context.fill();
+		//center
+		context.beginPath();
+		context.arc(400, 300, 4, degreesToRadians(360), false);
+		context.fillStyle = '#FACC2E';
+		context.fill();
+	}
 
+	flower();
 	Sun();
 	clouds();
 }
 
+
+//text functions
 function startText() {
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
 	context.fillText("Click the correct button to be born!", 200, 250);
 }
-
 function prettyText() {
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
 	context.fillText("Look! Something beautiful. Go take a look.", 200, 250);
 }
 
+//action functions
 function born() {
 	fillBG();;
 	drawPerson();
 	prettyText();
+	document.getElementById('birth').disabled = true;
 }
 function approach() {
 	fillBG();
 	drawPerson();
+	bottom.x += 5;
+	shirt.x += 5;
+	head.x += 5;
+	arm.x += 5;
+	sleeve.x += 5;
+	hair.x += 5;
+
 
 }
 
-
+var bottom = {x:5, y:320, width:30, height:50};
+var shirt = {x:5, y:320, width:30, height:46};
+var head = {x:5, y:320, width:30, height:20};
+var arm = {x:15, y:340, width:12, height:25};
+var sleeve = {x:15, y:340, width:12, height:10};
+var hair = {x:5, y:320, width:30, height:4};
 
 function drawPerson() {
 	//bottom
 	context.beginPath();
-	context.rect(5, 320, 30, 50);
+	context.rect(bottom.x, bottom.y, bottom.width, bottom.height);
 	context.fillStyle = "black";
 	context.fill();
 
-	//shirt_4
+	//shirt
 	context.beginPath();
-	context.rect(5, 320, 30, 46);
+	context.rect(shirt.x, shirt.y, shirt.width, shirt.height);
 	context.fillStyle = "red";
 	context.fill();
 
 	//head
 	context.beginPath();
-	context.rect(5, 320, 30, 20);
+	context.rect(head.x, head.y, head.width, head.height);
 	context.fillStyle = "#B45F04";
 	context.fill();
 	//arm
 	context.beginPath();
-	context.rect(15, 340, 12, 25);
+	context.rect(arm.x, arm.y, arm.width, arm.height);
 	context.fillStyle = "#B45F04";
 	context.fill();
 
 	//sleeve
 	context.beginPath();
-	context.rect(15, 340, 12, 10);
+	context.rect(sleeve.x, sleeve.y, sleeve.width, sleeve.height);
 	context.fillStyle = "#B40404";
 	context.fill();
 
 	//hair
 	context.beginPath();
-	context.rect(5, 320, 30, 4);
+	context.rect(hair.x, hair.y, hair.width, hair.height);
 	context.fillStyle = "black";
 	context.fill();
 	
