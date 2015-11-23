@@ -327,7 +327,6 @@ function greetPerson() {
 	if (bottom.x <= 423) {
 		document.getElementById('meet').disabled = true;
 		document.getElementById('share').disabled = false;
-		bee();
 		shareText();
 	}
 
@@ -358,10 +357,11 @@ function enterLove() {
 function sharing() {
 	delay = setTimeout(function(){
 		ironyText()},3000);
-	bee();
-}
-function bee() {
-
+	fillBG();
+	drawPerson();
+	drawLove();
+	//bee();
+	drawBee();
 }
 function beeAttack() {
 
@@ -516,16 +516,16 @@ function drawBear() {
 	context.fill();
 }
 //bee variables
-var beeBody;
-var beeStripe;
-var beeSting;
-var beeWings;
+var bee = {x:400, y:100, radius:6, dx:1, dy:1};
+//var beeSting;
+//var beeWings;
 function drawBee() {
 	//body
 	context.beginPath();
-	context.arc(400, 300, 4, degreesToRadians(360), false);
+	context.arc(bee.x, bee.y, bee.radius, degreesToRadians(360), false);
 	context.fillStyle = '#FACC2E';
 	context.fill();
+	context.closePath();
 	//stripe
 	context.beginPath();
 	context.moveTo(400,350);
@@ -547,6 +547,7 @@ function degreesToRadians(degrees) {
 window.onload = function() {
 	fillBG();
 	startText();
+	//drawBee();
 	
 }
 
