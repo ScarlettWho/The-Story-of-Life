@@ -33,9 +33,11 @@ canvas {
 	<br>
 	<input type = 'button' id = 'listen' value = 'Listen' onclick = 'bearAttack()' disabled = 'true'>
 	<br>
-	<input type = 'button' id = 'revisit' value = 'Return' onclick = '()' disabled = 'true'>
+	<input type = 'button' id = 'revisit' value = 'Return' onclick = 'enterLove()' disabled = 'true'>
 	<br>
-	<input type = 'button' id = 'irony' value = 'Love' onclick = '()' disabled = 'true'>
+	<input type = 'button' id = 'meet' value = 'Meet' onclick = 'greetPerson()' disabled = 'true'>
+	<br>
+	<input type = 'button' id = 'share' value = 'Share' onclick = 'sharing()' disabled = 'true'>
 	<br>
 	<input type = 'button' id = 'escape' value = 'RUN!' onclick = '()' disabled = 'true'>
 
@@ -148,30 +150,78 @@ function fillBG() {
 
 //text functions
 function startText() {
+	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
 	context.fillText("Click the correct button to be born!", 200, 250);
+	},300);
 }
 function prettyText() {
+	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
 	context.fillText("Look! Something beautiful. Go take a look.", 200, 250);
+	},900);
 }
 function ohNoText() {
+	delay = setTimeout(function(){
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("~growl~", 200, 150);
+	},1500);
+	
+
+	delay = setTimeout(function(){
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("~growl~", 400, 280);
+	},2500);
+	
+
+	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
 	context.fillText("What's that sound?", 200, 250);
+	},3500);
 }
 function Ahhh() {
+	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("Its a bear! Defend your beauty!", 200, 250);
+	context.fillText("Its a bear!", 200, 250);
+	},6000);
+	
+	delay = setTimeout(function(){
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("Defend the beauty in your world!", 150, 150);
+	},4000);
 }
 function loveText() {
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("Good job!", 200, 250);
 
+	delay = setTimeout(function(){
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("Return to the beautiful thing.", 150, 150);
+	},600);
+}
+function whoDatText() {
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("Who's that? Go meet them.", 200, 250);	
+}
+function shareText() {
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("Why not share the thing you fought so hard for.", 200, 250);
 }
 function ironyText() {
-
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("What's this?! A hilarious case of irony!  Run!", 200, 250);
 }
 function deathText() {
 
@@ -182,11 +232,15 @@ function deathText() {
 
 //action functions
 function born() {
-	fillBG();;
+	delay = setTimeout(function(){
+	fillBG();
 	drawPerson();
+	//drawLove();
 	prettyText();
+	},600);	
 	document.getElementById('birth').disabled = true;
 	document.getElementById('smell').disabled = false;
+
 }
 function approach() {
 
@@ -206,14 +260,11 @@ function approach() {
 	}
 }	
 function bearAttack() {
-	timer = setInterval('bearAttack()',100);
-
-	if(neck2.x !== 440) {
+	timer = setInterval(function(){
 		body.x -= 3;
 		back.x -= 3;
 		neck.x -= 3;
 		neck2.x -= 3;
-		//bear.x -= 3;
 		legA.x -= 3;
 		legB.x -= 3;
 		ear.x -= 3;
@@ -222,19 +273,94 @@ function bearAttack() {
 		fillBG();
 		drawBear();
 		drawPerson();
-		Ahhh();
+		if(neck2.x < 440)
+			clearInterval(timer);
+			//Ahhh();
+	},50);
+
 		document.getElementById('listen').disabled = true;
 		document.getElementById('attack').disabled = false;
-	}
+		Ahhh();
 }
 function stndGround() {
+	timer = setInterval(function(){
+	bottom.x += 12;
+	shirt.x += 12;
+	head.x += 12;
+	arm.x += 12;
+	sleeve.x += 12;
+	hair.x += 12;
+
+	body.x += 12;
+	back.x += 12;
+	neck.x += 12;
+	neck2.x += 12;
+	legA.x += 12;
+	legB.x += 12;
+	ear.x += 12;
+	tail.x += 12;
+
+	fillBG();
+	drawBear();
+	drawPerson();
+	if(neck2.x > 600)
+		clearInterval(timer);
+		loveText();
+	},50);
 	document.getElementById('attack').disabled = true;
+	document.getElementById('revisit').disabled = false;
+	
 }
 
-function revisit() {
+function greetPerson() {
+	fillBG();
+	drawPerson();
+	drawLove();
+
+	bottom.x -= 12;
+	shirt.x -= 12;
+	head.x -= 12;
+	arm.x -= 12;
+	sleeve.x -= 12;
+	hair.x -= 12;
+	
+	if (bottom.x <= 423) {
+		document.getElementById('meet').disabled = true;
+		document.getElementById('share').disabled = false;
+		bee();
+		shareText();
+	}
 
 }
-function meet() {
+function enterLove() {
+	drawLove();
+	timer = setInterval(function(){
+	
+	loveBottom.x += 12;
+	loveShirt.x += 12;
+	loveHead.x += 12;
+	loveArm.x += 12;
+	loveSleeve.x += 12;
+	loveHair.x += 12;
+
+	fillBG();
+	drawLove();
+	drawPerson();
+
+	if(loveBottom.x > 330)
+		clearInterval(timer);
+		whoDatText();	
+	},100);
+
+	document.getElementById('revisit').disabled = true;
+	document.getElementById('meet').disabled = false;
+}
+function sharing() {
+	delay = setTimeout(function(){
+		ironyText()},3000);
+	bee();
+}
+function bee() {
 
 }
 function beeAttack() {
@@ -289,6 +415,49 @@ function drawPerson() {
 	context.fillStyle = "black";
 	context.fill();
 }
+//love variables
+var loveBottom = {x:-30, y:320, width:30, height:50};
+var loveShirt = {x:-30, y:320, width:30, height:46};
+var loveHead = {x:-30, y:320, width:30, height:20};
+var loveArm = {x:-24, y:340, width:12, height:25};
+var loveSleeve = {x:-24, y:340, width:12, height:10};
+var loveHair = {x:-30, y:320, width:30, height:4};
+function drawLove() {
+	//bottom
+	context.beginPath();
+	context.rect(loveBottom.x, loveBottom.y, loveBottom.width, loveBottom.height);
+	context.fillStyle = "black";
+	context.fill();
+
+	//shirt
+	context.beginPath();
+	context.rect(loveShirt.x, loveShirt.y, loveShirt.width, loveShirt.height);
+	context.fillStyle = "#8181F7";
+	context.fill();
+
+	//head
+	context.beginPath();
+	context.rect(loveHead.x, loveHead.y, loveHead.width, loveHead.height);
+	context.fillStyle = "#F6D8CE";
+	context.fill();
+	//arm
+	context.beginPath();
+	context.rect(loveArm.x, loveArm.y, loveArm.width, loveArm.height);
+	context.fillStyle = "#F6D8CE";
+	context.fill();
+
+	//sleeve
+	context.beginPath();
+	context.rect(loveSleeve.x, loveSleeve.y, loveSleeve.width, loveSleeve.height);
+	context.fillStyle = "#5858FA";
+	context.fill();
+
+	//hair
+	context.beginPath();
+	context.rect(loveHair.x, loveHair.y, loveHair.width, loveHair.height);
+	context.fillStyle = "#3B0B0B";
+	context.fill();
+}
 //bear variables
 var body = {x:647, y:290, width:80, height:55};
 var back = {x:652, y:280, width:70, height:55};
@@ -299,7 +468,7 @@ var legA = {x:637, y:320, width:30, height:50};
 var legB = {x:707, y:320, width:30, height:50};
 var ear = {x:622, y:280, width:12, height:12};
 var tail = {x:724, y:295, width:12, height:12};
-function drawBear(){
+function drawBear() {
 	//body
 	context.beginPath();
 	context.rect(body.x, body.y, body.width, body.height);
@@ -351,6 +520,22 @@ var beeBody;
 var beeStripe;
 var beeSting;
 var beeWings;
+function drawBee() {
+	//body
+	context.beginPath();
+	context.arc(400, 300, 4, degreesToRadians(360), false);
+	context.fillStyle = '#FACC2E';
+	context.fill();
+	//stripe
+	context.beginPath();
+	context.moveTo(400,350);
+	context.lineTo(400,305);
+	context.lineWidth = 2
+	context.strokeStyle = 'black';
+	context.stroke();
+	//wings
+	//stinger
+}
 
 
 
