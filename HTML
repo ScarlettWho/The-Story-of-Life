@@ -145,7 +145,8 @@ function fillBG() {
 	flower();
 	Sun();
 	clouds();
-}
+}// ADD ONCLICK FUNCTION TO CALL PRETTYTEXT()
+ // ADD FUNCTION TO MAKE CLOUDS MOVE
 
 
 //text functions
@@ -153,14 +154,14 @@ function startText() {
 	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("Click the correct button to be born!", 200, 250);
+	context.fillText("Click in the correct spot to approach the light and be born into the world.", 200, 250);
 	},300);
-}
+}//MAKE TEXT FADE IN
 function prettyText() {
 	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("Look! Something beautiful. Go take a look.", 200, 250);
+	context.fillText("Look! Something beautiful. Use the arrow keys to go take a look.", 200, 250);
 	},900);
 }
 function ohNoText() {
@@ -181,7 +182,7 @@ function ohNoText() {
 	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("What's that sound?", 200, 250);
+	context.fillText("What's that sound? Use the L key to listen closer.", 200, 250);
 	},3500);
 }
 function Ahhh() {
@@ -194,7 +195,7 @@ function Ahhh() {
 	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("Defend the beauty in your world!", 150, 150);
+	context.fillText("Defend the beauty in your world! Chase him off!", 150, 150);
 	},4000);
 }
 function loveText() {
@@ -211,20 +212,22 @@ function loveText() {
 function whoDatText() {
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("Who's that? Go meet them.", 200, 250);	
+	context.fillText("Wait a mintue. Who's that? Go meet them.", 200, 250);	
 }
 function shareText() {
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("Why not share the thing you fought so hard for.", 200, 250);
+	context.fillText("Why not share the thing you fought so hard for. Press the spacebar.", 200, 250);
 }
 function ironyText() {
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("What's this?! A hilarious case of irony!  Run!", 200, 250);
+	context.fillText("What's this?! A hilarious case of irony! Run! Run! Press R to run!", 200, 250);
 }
 function deathText() {
-
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText("Alas, you suffer the consequences of your choices.", 200, 250);
 }
 
 
@@ -240,7 +243,6 @@ function born() {
 	},600);	
 	document.getElementById('birth').disabled = true;
 	document.getElementById('smell').disabled = false;
-
 }
 function approach() {
 
@@ -281,7 +283,7 @@ function bearAttack() {
 		document.getElementById('listen').disabled = true;
 		document.getElementById('attack').disabled = false;
 		Ahhh();
-}
+}//USER PRESSES L TO LISTEN
 function stndGround() {
 	timer = setInterval(function(){
 	bottom.x += 12;
@@ -309,9 +311,7 @@ function stndGround() {
 	},50);
 	document.getElementById('attack').disabled = true;
 	document.getElementById('revisit').disabled = false;
-	
-}
-
+}//USER USES ARROW KEYS TO MOVE
 function greetPerson() {
 	fillBG();
 	drawPerson();
@@ -329,7 +329,6 @@ function greetPerson() {
 		document.getElementById('share').disabled = false;
 		shareText();
 	}
-
 }
 function enterLove() {
 	drawLove();
@@ -353,7 +352,9 @@ function enterLove() {
 
 	document.getElementById('revisit').disabled = true;
 	document.getElementById('meet').disabled = false;
-}
+}//DELAY CHARACTERS ENTRANCE
+ //APPROACH FLOWER AND STOP
+ //USER CANNOT MOVE AT THIS TIME
 function sharing() {
 	delay = setTimeout(function(){
 		ironyText()},3000);
@@ -362,13 +363,18 @@ function sharing() {
 	drawLove();
 	//bee();
 	drawBee();
-}
+}//PRESS THE SPACEBAR TO SHARE
+ //A HEART APPEARS AND FADES
+ //DRAW BEE, CALL BEE FLIGHT PATH
 function beeAttack() {
 
-}
+}//BEE FLIGHT PATH; BEE ASCEND, STOP, AND HOVER
+ //BEE ATTACKS
 function dead() {
 
 }
+//ADD MOVE CHARATCER FUNCTION THAT USES ARROOW KEYS
+//CRAETE RUN FUNCTION THAT CALLS BEE ATTACK AT CERTAIN POINT
 
 
 
@@ -535,7 +541,7 @@ function drawBee() {
 	context.stroke();
 	//wings
 	//stinger
-}
+}//COMPLETE DRAW BEE FUNCTION
 
 
 
