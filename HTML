@@ -25,8 +25,7 @@ canvas {
 </style>
 <body>
 	<canvas id = 'canvas' width = '600' height = '400'></canvas>
-	<input type = 'button' id = 'birth' value = 'Hello World' onclick = 'born()'>
-	<br>
+	
 	<input type = 'button' id = 'smell' value = 'Investigate' onclick = 'approach()' disabled = 'true'>
 	<br>
 	<input type = 'button' id = 'attack' value = 'Defend' onclick = 'stndGround()' disabled = 'true'>
@@ -47,6 +46,7 @@ canvas {
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 var timer;
+var found = false;
 
 
 //draws scene
@@ -145,24 +145,69 @@ function fillBG() {
 	flower();
 	Sun();
 	clouds();
-}// ADD ONCLICK FUNCTION TO CALL PRETTYTEXT()
- // ADD FUNCTION TO MAKE CLOUDS MOVE
+}
 
 
 //text functions
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+		var words = text.split(' ');
+		var line = '';
+
+		for(var n = 0; n < words.length; n++) {
+		  var testLine = line + words[n] + ' ';
+		  var metrics = context.measureText(testLine);
+		  var testWidth = metrics.width;
+		  if (testWidth > maxWidth && n > 0) {
+			context.strokeText(line, x, y);
+			context.fillText(line, x, y);
+			line = words[n] + ' ';
+			y += lineHeight;
+		  }
+		  else {
+			line = testLine;
+		  }
+		}
+		context.strokeText(line, x, y);
+		context.fillText(line, x, y);
+  }
+
+
 function startText() {
-	delay = setTimeout(function(){
-	context.font = "20px Matisse itc";
-	context.fillStyle = "black";
-	context.fillText("Click in the correct spot to approach the light and be born into the world.", 200, 250);
-	},300);
-}//MAKE TEXT FADE IN
+	strtTxt = "Click the correct spot to be born into the light.";
+	m = 130;
+	i = 0;
+
+	//for (i = 0; i < strtTxt.length; i++) {
+	type = setInterval(function(){
+		lttrSize = Number(context.measureText(strtTxt.charAt(i)).width);
+		context.font = "20px Matisse itc";
+		context.fillStyle = "black";
+		context.fillText(strtTxt.charAt(i), m, 200);
+		i++;
+		m += lttrSize+1;
+		if (i == strtTxt.length) {
+			clearInterval(type);
+		}
+	//}
+	},100);
+}
+
 function prettyText() {
-	delay = setTimeout(function(){
-	context.font = "20px Matisse itc";
-	context.fillStyle = "black";
-	context.fillText("Look! Something beautiful. Use the arrow keys to go take a look.", 200, 250);
-	},900);
+	prttyTxt = "Look! Something beautiful. Go take a look.";
+	m = 130;
+	i = 0;
+
+	type = setInterval(function(){
+		lttrSize = Number(context.measureText(prttyTxt.charAt(i)).width);
+		context.font = "20px Matisse itc";
+		context.fillStyle = "black";
+		context.fillText(prttyTxt.charAt(i), m, 200);
+		i++
+		m += lttrSize + 1;
+		if (i == prttyTxt.length) {
+			clearInterval(type);
+		}
+	},100);
 }
 function ohNoText() {
 	delay = setTimeout(function(){
@@ -182,7 +227,7 @@ function ohNoText() {
 	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("What's that sound? Use the L key to listen closer.", 200, 250);
+	context.fillText("What's that sound?", 200, 250);
 	},3500);
 }
 function Ahhh() {
@@ -195,7 +240,7 @@ function Ahhh() {
 	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("Defend the beauty in your world! Chase him off!", 150, 150);
+	context.fillText("Defend the beauty in your world!", 150, 150);
 	},4000);
 }
 function loveText() {
@@ -212,23 +257,43 @@ function loveText() {
 function whoDatText() {
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("Wait a mintue. Who's that? Go meet them.", 200, 250);	
+	context.fillText("Who's that? Go meet them.", 200, 250);	
 }
 function shareText() {
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("Why not share the thing you fought so hard for. Press the spacebar.", 200, 250);
+	context.fillText("Why not share the thing you fought so hard for.", 200, 250);
 }
 function ironyText() {
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("What's this?! A hilarious case of irony! Run! Run! Press R to run!", 200, 250);
+	context.fillText("What's this?! A hilarious case of irony!  Run!", 200, 250);
 }
 function deathText() {
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("Alas, you suffer the consequences of your choices.", 200, 250);
+	context.fillText("WAlas, you've suffered the consequences of your choices and convictions. Now you're dead.", 200, 250);
 }
+
+
+//user functions
+function clickSun(x, y) {
+	//console.log('Nope');
+	if (found == true) {
+			console.log(found);
+			return;
+		}
+	d = Math.sqrt((560 - x)*(560 - x) + (40 - y)*(40 - y));
+	if (d <= 176) {
+		born();
+		found = true;
+		//console.log('Yep');
+		//console.log(d);
+		}
+		
+}
+
+
 
 
 
@@ -241,8 +306,6 @@ function born() {
 	//drawLove();
 	prettyText();
 	},600);	
-	document.getElementById('birth').disabled = true;
-	document.getElementById('smell').disabled = false;
 }
 function approach() {
 
@@ -283,7 +346,7 @@ function bearAttack() {
 		document.getElementById('listen').disabled = true;
 		document.getElementById('attack').disabled = false;
 		Ahhh();
-}//USER PRESSES L TO LISTEN
+}
 function stndGround() {
 	timer = setInterval(function(){
 	bottom.x += 12;
@@ -310,8 +373,8 @@ function stndGround() {
 		loveText();
 	},50);
 	document.getElementById('attack').disabled = true;
-	document.getElementById('revisit').disabled = false;
-}//USER USES ARROW KEYS TO MOVE
+	document.getElementById('revisit').disabled = false;	
+}
 function greetPerson() {
 	fillBG();
 	drawPerson();
@@ -352,9 +415,7 @@ function enterLove() {
 
 	document.getElementById('revisit').disabled = true;
 	document.getElementById('meet').disabled = false;
-}//DELAY CHARACTERS ENTRANCE
- //APPROACH FLOWER AND STOP
- //USER CANNOT MOVE AT THIS TIME
+}
 function sharing() {
 	delay = setTimeout(function(){
 		ironyText()},3000);
@@ -363,18 +424,13 @@ function sharing() {
 	drawLove();
 	//bee();
 	drawBee();
-}//PRESS THE SPACEBAR TO SHARE
- //A HEART APPEARS AND FADES
- //DRAW BEE, CALL BEE FLIGHT PATH
+}
 function beeAttack() {
 
-}//BEE FLIGHT PATH; BEE ASCEND, STOP, AND HOVER
- //BEE ATTACKS
+}
 function dead() {
 
 }
-//ADD MOVE CHARATCER FUNCTION THAT USES ARROOW KEYS
-//CRAETE RUN FUNCTION THAT CALLS BEE ATTACK AT CERTAIN POINT
 
 
 
@@ -541,7 +597,7 @@ function drawBee() {
 	context.stroke();
 	//wings
 	//stinger
-}//COMPLETE DRAW BEE FUNCTION
+}
 
 
 
@@ -553,8 +609,10 @@ function degreesToRadians(degrees) {
 window.onload = function() {
 	fillBG();
 	startText();
-	//drawBee();
-	
+	canvas.onclick = function(event) {
+		clickSun(event.clientX, event.clientY);
+	}
+
 }
 
 
