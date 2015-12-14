@@ -149,35 +149,13 @@ function fillBG() {
 
 
 //text functions
-function wrapText(context, text, x, y, maxWidth, lineHeight) {
-		var words = text.split(' ');
-		var line = '';
-
-		for(var n = 0; n < words.length; n++) {
-		  var testLine = line + words[n] + ' ';
-		  var metrics = context.measureText(testLine);
-		  var testWidth = metrics.width;
-		  if (testWidth > maxWidth && n > 0) {
-			context.strokeText(line, x, y);
-			context.fillText(line, x, y);
-			line = words[n] + ' ';
-			y += lineHeight;
-		  }
-		  else {
-			line = testLine;
-		  }
-		}
-		context.strokeText(line, x, y);
-		context.fillText(line, x, y);
-  }
-
-
 function startText() {
 	strtTxt = "Click the correct spot to be born into the light.";
 	m = 130;
 	i = 0;
 
 	//for (i = 0; i < strtTxt.length; i++) {
+	delay = setTimeout(function(){
 	type = setInterval(function(){
 		lttrSize = Number(context.measureText(strtTxt.charAt(i)).width);
 		context.font = "20px Matisse itc";
@@ -187,9 +165,10 @@ function startText() {
 		m += lttrSize+1;
 		if (i == strtTxt.length) {
 			clearInterval(type);
-		}
+			}
 	//}
-	},100);
+		},100);
+	},1500);
 }
 
 function prettyText() {
@@ -197,18 +176,47 @@ function prettyText() {
 	m = 130;
 	i = 0;
 
-	type = setInterval(function(){
+	delay = setTimeout(function(){
+		type = setInterval(function(){
 		lttrSize = Number(context.measureText(prttyTxt.charAt(i)).width);
 		context.font = "20px Matisse itc";
 		context.fillStyle = "black";
 		context.fillText(prttyTxt.charAt(i), m, 200);
-		i++
+		i++;
 		m += lttrSize + 1;
 		if (i == prttyTxt.length) {
 			clearInterval(type);
-		}
-	},100);
+			fillBG();
+			drawPerson();
+			instrct1();
+			}
+		},100);
+	},1000);
 }
+
+function instrct1() {
+	console.log("wat");
+
+	instrct1Txt = "Use the arrow keys to move left and right."
+	m = 130;
+	i = 0;
+	delay = setTimeout(function(){
+		type = setInterval(function(){
+		lttrSize = Number(context.measureText(instrct1Txt.charAt(i)).width);
+		context.font = "20px Matisse itc";
+		context.fillStyle = "black";
+		context.fillText(instrct1Txt.charAt(i), m, 200);
+		i++;
+		m += lttrSize + 1;
+		if (i == instrct1Txt.length) {
+			clearInterval(type);
+			fillBG();
+			drawPerson();
+			}
+		},100);
+	},500);
+}
+
 function ohNoText() {
 	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
@@ -289,8 +297,33 @@ function clickSun(x, y) {
 		found = true;
 		//console.log('Yep');
 		//console.log(d);
-		}
-		
+		}	
+}
+
+document.addEventListener('keydown', playerMove, false);
+function playerMove(e) {
+	if (e.keyCode == 39) {
+		console.log("move");
+	fillBG();
+	drawPerson();
+	bottom.x += 12;
+	shirt.x += 12;
+	head.x += 12;
+	arm.x += 12;
+	sleeve.x += 12;
+	hair.x += 12;
+	}
+	else if (e.keycode == 37) {
+		console.log("pls");
+	fillBG();
+	drawPerson();
+	bottom.x -= 12;
+	shirt.x -= 12;
+	head.x -= 12;
+	arm.x -= 12;
+	sleeve.x -= 12;
+	hair.x -= 12;
+	}
 }
 
 
@@ -298,7 +331,7 @@ function clickSun(x, y) {
 
 
 
-//action functions
+//story functions
 function born() {
 	delay = setTimeout(function(){
 	fillBG();
