@@ -26,8 +26,7 @@ canvas {
 <body>
 	<canvas id = 'canvas' width = '600' height = '400'></canvas>
 	
-	<input type = 'button' id = 'smell' value = 'Investigate' onclick = 'approach()' disabled = 'true'>
-	<br>
+	
 	<input type = 'button' id = 'attack' value = 'Defend' onclick = 'stndGround()' disabled = 'true'>
 	<br>
 	<input type = 'button' id = 'listen' value = 'Listen' onclick = 'bearAttack()' disabled = 'true'>
@@ -150,7 +149,7 @@ function fillBG() {
 
 //text functions
 function startText() {
-	strtTxt = "Click the correct spot to be born into the light.";
+	strtTxt = "Click the correct spot to be born into the LIGHT.";
 	m = 130;
 	i = 0;
 
@@ -195,7 +194,7 @@ function prettyText() {
 }
 
 function instrct1() {
-	console.log("wat");
+	//console.log("wat");
 
 	instrct1Txt = "Use the arrow keys to move left and right."
 	m = 130;
@@ -218,38 +217,101 @@ function instrct1() {
 }
 
 function ohNoText() {
+	m = 200;
+	n = 150;
+	o = 400;
+	p = 280;
+
 	delay = setTimeout(function(){
-	context.font = "20px Matisse itc";
-	context.fillStyle = "black";
-	context.fillText("~growl~", 200, 150);
+		shift = setInterval(function(){
+			fillBG();
+			drawPerson();
+			context.font = "20px Matisse itc";
+			context.fillStyle = "black";
+			context.fillText("~growl~", m, n);
+			m +=1;
+			n +=1;
+			if (m == 210){
+				clearInterval(shift);
+				fillBG();
+				drawPerson();
+				shift = setInterval(function(){
+					fillBG();
+					drawPerson();
+					context.font = "20px Matisse itc";
+					context.fillStyle = "black";
+					context.fillText("~growl~", o, p);
+					o -=1;
+					p -=1;
+					if (o == 380) {
+						clearInterval(shift)
+						fillBG();
+						drawPerson();
+					}
+				},50);
+			}
+		},50);
 	},1500);
 	
-
+	watDatTxt = "What's that sound?"
+	m = 130;
+	i =0;
 	delay = setTimeout(function(){
-	context.font = "20px Matisse itc";
-	context.fillStyle = "black";
-	context.fillText("~growl~", 400, 280);
-	},2500);
-	
-
+		type = setInterval(function(){
+		lttrSize = Number(context.measureText(watDatTxt.charAt(i)).width);
+		context.font = "20px Matisse itc";
+		context.fillStyle = "black";
+		context.fillText(watDatTxt.charAt(i), m, 200);
+		i++;
+		m += lttrSize + 1;
+		if (i == watDatTxt.length) {
+			clearInterval(type);
+			instrct2();
+			}
+		},100);
+	},8000);
+}
+function instrct2() {
+	instrct1Txt = "Press L to listen closer."
+	m = 130;
+	i = 0;
 	delay = setTimeout(function(){
-	context.font = "20px Matisse itc";
-	context.fillStyle = "black";
-	context.fillText("What's that sound?", 200, 250);
-	},3500);
+		type = setInterval(function(){
+		lttrSize = Number(context.measureText(instrct1Txt.charAt(i)).width);
+		context.font = "20px Matisse itc";
+		context.fillStyle = "black";
+		context.fillText(instrct1Txt.charAt(i), m, 250);
+		i++;
+		m += lttrSize + 1;
+		if (i == instrct1Txt.length) {
+			clearInterval(type);
+			}
+		},100);
+	},500);
 }
 function Ahhh() {
+	starsTxt = "My stars! It's a bear!"
+	m = 130;
+	i = 0;
 	delay = setTimeout(function(){
-	context.font = "20px Matisse itc";
-	context.fillStyle = "black";
-	context.fillText("Its a bear!", 200, 250);
-	},6000);
+		type = setInterval(function(){
+		lttrSize = Number(context.measureText(starsTxt.charAt(i)).width);
+		context.font = "20px Matisse itc";
+		context.fillStyle = "black";
+		context.fillText(starsTxt.charAt(i), m, 250);
+		i++;
+		m += lttrSize + 1;
+		if (i == starsTxt.length) {
+			clearInterval(type);
+			}
+		},100);
+	},4000);
 	
 	delay = setTimeout(function(){
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
 	context.fillText("Defend the beauty in your world!", 150, 150);
-	},4000);
+	},6000);
 }
 function loveText() {
 	context.font = "20px Matisse itc";
@@ -301,8 +363,9 @@ function clickSun(x, y) {
 }
 
 document.addEventListener('keydown', playerMove, false);
+document.addEventListener('keydown', playerListen, false);
 function playerMove(e) {
-	if (e.keyCode == 39) {
+	if (e.keyCode == 39 && bottom.x < 330) {
 		console.log("move");
 	fillBG();
 	drawPerson();
@@ -313,7 +376,7 @@ function playerMove(e) {
 	sleeve.x += 12;
 	hair.x += 12;
 	}
-	else if (e.keycode == 37) {
+	else if (e.keyCode == 37 && bottom.x < 330 && bottom.x > 5) {
 		console.log("pls");
 	fillBG();
 	drawPerson();
@@ -323,6 +386,15 @@ function playerMove(e) {
 	arm.x -= 12;
 	sleeve.x -= 12;
 	hair.x -= 12;
+	}
+	else if (bottom.x >= 330) {
+		document.removeEventListener('keydown', playerMove,false);
+		ohNoText();
+	}
+}
+function playerListen(e) {
+	if (e.keyCode == 76) {
+		bearAttack();
 	}
 }
 
@@ -340,23 +412,6 @@ function born() {
 	prettyText();
 	},600);	
 }
-function approach() {
-
-	fillBG();
-	drawPerson();
-	bottom.x += 12;
-	shirt.x += 12;
-	head.x += 12;
-	arm.x += 12;
-	sleeve.x += 12;
-	hair.x += 12;
-	
-	if (bottom.x >= 330) {
-		document.getElementById('smell').disabled = true;
-		document.getElementById('listen').disabled = false;
-		ohNoText();
-	}
-}	
 function bearAttack() {
 	timer = setInterval(function(){
 		body.x -= 3;
