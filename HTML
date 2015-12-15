@@ -408,12 +408,30 @@ function whoDatText() {
 		document.getElementById('meet').disabled = false;
 			}
 		},100);
-	},1500);
+	},3000);
 }
 function shareText() {
+	shrTxt = "Why not share the thing you fought so hard for.";
+	m = 130;
+	n = 120;
+	i = 0;
+	delay = setTimeout(function(){
+	type = setInterval(function(){
+	lttrSize = Number(context.measureText(shrTxt.charAt(i)).width);
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText("Why not share the thing you fought so hard for.", 200, 250);
+	context.fillText(shrTxt.charAt(i), m, n);
+	i++;
+	m += lttrSize + 1;
+	if (i == 24) {
+		m=130;
+		n=150;
+	}
+	else if (i == shrTxt.length) {
+		clearInterval(type);
+			}
+		},100);
+	},1000);
 }
 function ironyText() {
 	context.font = "20px Matisse itc";
@@ -573,8 +591,8 @@ function bearAttack() {
 		Ahhh();
 }
 function stndGround() {
-	mark = 600
 	timer = setInterval(function(){
+	
 	bottom.x += 12;
 	shirt.x += 12;
 	head.x += 12;
@@ -594,9 +612,10 @@ function stndGround() {
 	fillBG();
 	drawBear();
 	drawPerson();
-	if(neck2.x == mark)
+	if(neck2.x > 600) {
 		clearInterval(timer);
 		congratsText();
+		}
 	},50);
 	console.log(bottom.x);
 }
@@ -605,14 +624,14 @@ function greetPerson() {
 	drawPerson();
 	drawOther();
 
-	bottom.x -= 12;
-	shirt.x -= 12;
-	head.x -= 12;
-	arm.x -= 12;
-	sleeve.x -= 12;
-	hair.x -= 12;
-	
-	if (bottom.x <= 423) {
+	bottom.x -= 6;
+	shirt.x -= 6;
+	head.x -= 6;
+	arm.x -= 6;
+	sleeve.x -= 6;
+	hair.x -= 6;
+	console.log(bottom.x);
+	if (bottom.x == 425) {
 		document.getElementById('meet').disabled = true;
 		document.getElementById('share').disabled = false;
 		shareText();
