@@ -27,8 +27,6 @@ canvas {
 	<canvas id = 'canvas' width = '600' height = '400'></canvas>
 	
 	
-	<input type = 'button' id = 'revisit' value = 'Return' onclick = 'enterLove()' disabled = 'true'>
-	<br>
 	<input type = 'button' id = 'meet' value = 'Meet' onclick = 'greetPerson()' disabled = 'true'>
 	<br>
 	<input type = 'button' id = 'share' value = 'Share' onclick = 'sharing()' disabled = 'true'>
@@ -141,6 +139,10 @@ function fillBG() {
 	Sun();
 	clouds();
 }
+
+
+
+
 
 
 //text functions
@@ -350,33 +352,7 @@ function instrct3() {
 	},1000);
 }
 function congratsText() {
-	congratsTxt = "Good job! You survived! Return to the beautiful thing.";
-	m = 130;
-	n = 120;
-	i = 0;
-	type = setInterval(function(){
-	lttrSize = Number(context.measureText(congratsTxt.charAt(i)).width);
-	context.font = "20px Matisse itc";
-	context.fillStyle = "black";
-	context.fillText(congratsTxt.charAt(i), m, n);
-	i++;
-	m += lttrSize + 1;
-	if (i == 10) {
-		m = 130;
-		n = 150;
-	}
-	else if (i == 24) {
-		m = 130;
-		n = 180;
-	}
-	else if (i == congratsTxt.length) {
-		clearInterval(type);
-		playerMeet();
-		}
-	},100);
-}
-function whoDatText() {
-	whoDatTxt = "who's that? Why don't you go meet them?"
+	congratsTxt = "Good job! You survived! Return to the beautiful thing. Use R.";
 	m = 130;
 	n = 120;
 	i = 0;
@@ -385,18 +361,54 @@ function whoDatText() {
 	lttrSize = Number(context.measureText(congratsTxt.charAt(i)).width);
 	context.font = "20px Matisse itc";
 	context.fillStyle = "black";
-	context.fillText(whoDatTxt, m, n);
+	context.fillText(congratsTxt.charAt(i), m, n);
+	i++;
+	m += lttrSize + 1;
+		if (i == 10) {
+		m = 130;
+		n = 150;
+		}
+		else if (i == 24) {
+		m = 130;
+		n = 180;
+		}
+		else if (i == 55) {
+		m =130;
+		n=210;
+		}
+		else if (i == congratsTxt.length) {
+			clearInterval(type);
+			}
+		},100);
+	},1200);
+}
+function whoDatText() {
+	whoDatTxt = "who's that? Why don't you go meet them? Press the Meet button.";
+	m = 130;
+	n = 120;
+	i = 0;
+	delay = setTimeout(function(){
+	type = setInterval(function(){
+	lttrSize = Number(context.measureText(whoDatTxt.charAt(i)).width);
+	context.font = "20px Matisse itc";
+	context.fillStyle = "black";
+	context.fillText(whoDatTxt.charAt(i), m, n);
 	i++;
 	m += lttrSize + 1;
 	if (i == 12) {
 		m=130;
 		n=150;
 	}
+	else if (i == 40) {
+		m=130;
+		n=180;
+	}
 	else if (i == whoDatTxt.length) {
 		clearInterval(type);
-	}
-},100);
-},600);
+		document.getElementById('meet').disabled = false;
+			}
+		},100);
+	},1500);
 }
 function shareText() {
 	context.font = "20px Matisse itc";
@@ -445,6 +457,10 @@ function deathText() {
 }*/
 
 
+
+
+
+
 //user functions
 function clickSun(x, y) {
 	//console.log('Nope');
@@ -460,11 +476,7 @@ function clickSun(x, y) {
 		//console.log(d);
 		}	
 }
-
 document.addEventListener('keydown', playerMove, false);
-document.addEventListener('keydown', playerListen, false);
-document.addEventListener('keydown', playerDefend, false);
-document.addEventListener('keydown', playerMeet, false)
 function playerMove(e) {
 	if (e.keyCode == 39 && bottom.x < 330) {
 		console.log("move");
@@ -493,42 +505,36 @@ function playerMove(e) {
 		ohNoText();
 	}
 }
+document.addEventListener('keydown', playerListen, false);
 function playerListen(e) {
 	if (e.keyCode == 76) {
 		bearAttack();
 	}
 }
+document.addEventListener('keydown', playerDefend, false);
 function playerDefend(e) {
 	
 	if (e.keyCode == 68) {
 		stndGround();
 	}
 }
+document.addEventListener('keydown', playerMeet, false);
 function playerMeet(e) {
-	if (e.keyCode == 39) {
-		console.log("move");
+	console.log(bottom.x);
+	mark = 461;
+	if (e.keyCode == 82 && bottom.x > mark) {
+		console.log("rtrn");
 	fillBG();
 	drawPerson();
-	bottom.x += 12;
-	shirt.x += 12;
-	head.x += 12;
-	arm.x += 12;
-	sleeve.x += 12;
-	hair.x += 12;
+	bottom.x -= 8;
+	shirt.x -= 8;
+	head.x -= 8;
+	arm.x -= 8;
+	sleeve.x -= 8;
+	hair.x -= 8;
 	}
-	else if (e.keyCode == 37) {
-		console.log("pls");
-	fillBG();
-	drawPerson();
-	bottom.x -= 12;
-	shirt.x -= 12;
-	head.x -= 12;
-	arm.x -= 12;
-	sleeve.x -= 12;
-	hair.x -= 12;
-	}
-	else if (bottom.x == 440) {
-		document.removeEventListener('keydown', playerMove,false);
+	else if (bottom.x == mark) {
+		document.removeEventListener('keydown', playerMeet,false);
 		otherPlayer();
 	}
 }
@@ -567,6 +573,7 @@ function bearAttack() {
 		Ahhh();
 }
 function stndGround() {
+	mark = 600
 	timer = setInterval(function(){
 	bottom.x += 12;
 	shirt.x += 12;
@@ -587,10 +594,11 @@ function stndGround() {
 	fillBG();
 	drawBear();
 	drawPerson();
-	if(neck2.x > 600)
+	if(neck2.x == mark)
 		clearInterval(timer);
 		congratsText();
 	},50);
+	console.log(bottom.x);
 }
 function greetPerson() {
 	fillBG();
@@ -612,8 +620,8 @@ function greetPerson() {
 }
 function otherPlayer() {
 	drawOther();
+	mark = 330;
 	timer = setInterval(function(){
-	
 	loveBottom.x += 12;
 	loveShirt.x += 12;
 	loveHead.x += 12;
@@ -625,9 +633,11 @@ function otherPlayer() {
 	drawOther();
 	drawPerson();
 
-	if(loveBottom.x > 330)
+	if(loveBottom.x == mark){
+		console.log(loveBottom.x);
 		clearInterval(timer);
-		whoDatText();	
+		
+		}whoDatText();
 	},100);
 }
 function sharing() {
@@ -635,7 +645,7 @@ function sharing() {
 		ironyText()},3000);
 	fillBG();
 	drawPerson();
-	drawLove();
+	drawOther();
 	//bee();
 	drawBee();
 }
